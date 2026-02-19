@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matt Breimer — Communications Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1c2b3a;
+      --navy-2:  #243447;
+      --accent:  #3b82f6;
+      --bg:      #ffffff;
+      --bg-alt:  #f8fafc;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+      --radius:  8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      height: 58px;
+      background: rgba(28, 43, 58, 0.97);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-logo {
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: #fff; }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 116px 2rem 72px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .photo-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--navy-2);
+      border: 2px solid rgba(255,255,255,0.12);
+      margin: 0 auto 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.05em;
+      /* swap for <img> when you have a real photo */
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero .subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero .location {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 2rem;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      padding: 0.6rem 1.3rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.13);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.25);
+      color: #fff;
+    }
+
+    /* ── LAYOUT WRAPPERS ─────────────────────────── */
+    .band        { background: var(--bg); }
+    .band.alt    { background: var(--bg-alt); }
+
+    section {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 64px 2rem;
+    }
+
+    /* ── SECTION HEADING ─────────────────────────── */
+    h2.label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    /* ── ABOUT ───────────────────────────────────── */
+    .about p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #374151;
+      max-width: 660px;
+    }
+
+    /* ── SKILLS ──────────────────────────────────── */
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .skill-tags span {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.42rem 1rem;
+      border-radius: 100px;
+      font-size: 0.83rem;
+      font-weight: 500;
+    }
+
+    /* ── EXPERIENCE ──────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-row:first-child { padding-top: 0; }
+    .exp-row:last-child  { border-bottom: none; padding-bottom: 0; }
+
+    .exp-side {
+      padding-top: 2px;
+    }
+
+    .exp-date {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .exp-org {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .exp-role {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .exp-loc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .exp-note {
+      font-size: 0.85rem;
+      color: #4b5563;
+      line-height: 1.65;
+    }
+
+    .exp-link {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 0.2rem;
+    }
+
+    .exp-link:hover { text-decoration: underline; }
+
+    /* ── EDUCATION ───────────────────────────────── */
+    .edu-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-row:first-child { padding-top: 0; }
+    .edu-row:last-child  { border-bottom: none; padding-bottom: 0; }
+
+    .edu-years {
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .edu-school {
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+
+    .edu-degree {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ─────────────────────────────────── */
+    .contact-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+    }
+
+    .c-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--navy);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .c-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: rgba(255,255,255,0.75);
+    }
+
+    .c-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .c-val {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .c-val a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .c-val a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      text-align: center;
+      padding: 1.75rem 2rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 1.25rem 56px; }
+
+      .exp-row, .edu-row {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+      }
+
+      .exp-side { order: -1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Matt Breimer</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="profile-pic.webp" alt="Matt Breimer"
+         style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.12);margin:0 auto 1.75rem;display:block;">
+    <h1>Matt Breimer</h1>
+    <p class="subtitle">Communications Specialist</p>
+    <p class="location">Caledonia, Ontario, Canada</p>
+    <a href="https://www.linkedin.com/in/mattbreimer" target="_blank" rel="noopener" class="hero-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/>
+      </svg>
+      linkedin.com/in/mattbreimer
+    </a>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="band">
+    <section id="about">
+      <h2 class="label">About</h2>
+      <p class="about">
+        <span style="display:block;font-size:1.05rem;line-height:1.8;color:#374151;max-width:660px;">
+          Communications professional with over 15 years of experience spanning corporate communications,
+          public relations, and digital strategy. Skilled in writing and copywriting, concept and graphic design,
+          audio/video production, website design and management, analytics, email marketing,
+          and social media oversight.
+        </span>
+      </p>
+    </section>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="band alt">
+    <section id="skills">
+      <h2 class="label">Skills</h2>
+      <div class="skill-tags">
+        <span>Corporate Communications</span>
+        <span>Project Management</span>
+        <span>Email Marketing</span>
+        <span>Public Relations</span>
+        <span>Writing &amp; Copywriting</span>
+        <span>Graphic Design</span>
+        <span>Web Design &amp; Management</span>
+        <span>Social Media</span>
+        <span>Analytics</span>
+        <span>Audio / Video Production</span>
+        <span>Digital Strategy</span>
+        <span>Concept Design</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="band">
+    <section id="experience">
+      <h2 class="label">Experience</h2>
+      <div class="timeline">
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Feb 2019 – Present</div>
+            <div class="exp-org">Indwell</div>
+          </div>
+          <div>
+            <div class="exp-role">Communications Specialist</div>
+            <div class="exp-loc">Hamilton, Ontario</div>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Dec 2014 – Present</div>
+            <div class="exp-org">Hilltop City Web Design</div>
+          </div>
+          <div>
+            <div class="exp-role">Owner &amp; Web Designer</div>
+            <a href="http://hilltop.city/" target="_blank" rel="noopener" class="exp-link">hilltop.city</a>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Dec 2014 – Present</div>
+            <div class="exp-org">Media That Matters</div>
+          </div>
+          <div>
+            <div class="exp-role">Digital Strategist</div>
+            <a href="http://www.mediathatmatters.ca" target="_blank" rel="noopener" class="exp-link">mediathatmatters.ca</a>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">May 2018 – Feb 2019</div>
+            <div class="exp-org">Promise Keepers Canada</div>
+          </div>
+          <div>
+            <div class="exp-role">Marketing Developer</div>
+            <div class="exp-loc">Burlington, Ontario</div>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Jul 2009 – May 2018</div>
+            <div class="exp-org">Promise Keepers Canada</div>
+          </div>
+          <div>
+            <div class="exp-role">Marketing Associate</div>
+            <div class="exp-loc">Burlington, Ontario</div>
+            <p class="exp-note">
+              Implemented an online and social media strategy that expanded audience reach from 11,000 (2009)
+              to over 100,000 (2016). Led rebranding efforts including website and logo, developed new sub-brand
+              logos, and served on the Editorial Advisory Board for SEVEN Magazine.
+            </p>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Nov 2007 – Feb 2008</div>
+            <div class="exp-org">Hald-Nor Community Credit Union</div>
+          </div>
+          <div>
+            <div class="exp-role">Administrative Project Coordinator</div>
+            <div class="exp-loc">Caledonia, Ontario</div>
+          </div>
+        </div>
+
+        <div class="exp-row">
+          <div class="exp-side">
+            <div class="exp-date">Jun 2007 – Aug 2007</div>
+            <div class="exp-org">Bell ICT Outsourcing Solutions</div>
+          </div>
+          <div>
+            <div class="exp-role">Business Analyst</div>
+            <div class="exp-loc">Mississauga, Ontario</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="band alt">
+    <section id="education">
+      <h2 class="label">Education</h2>
+
+      <div class="edu-row">
+        <div class="edu-years">2003 – 2007</div>
+        <div>
+          <div class="edu-school">Redeemer University College</div>
+          <div class="edu-degree">Bachelor of Arts — Business / Marketing</div>
+        </div>
+      </div>
+
+      <div class="edu-row">
+        <div class="edu-years">2009</div>
+        <div>
+          <div class="edu-school">Centennial College</div>
+          <div class="edu-degree">Human Resources</div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="band">
+    <section id="contact">
+      <h2 class="label">Contact</h2>
+      <div class="contact-items">
+
+        <div class="contact-card">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Location</div>
+            <div class="c-val">Caledonia, Ontario, Canada</div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">LinkedIn</div>
+            <div class="c-val">
+              <a href="https://www.linkedin.com/in/mattbreimer" target="_blank" rel="noopener">
+                linkedin.com/in/mattbreimer
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Web</div>
+            <div class="c-val">
+              <a href="http://hilltop.city/" target="_blank" rel="noopener">hilltop.city</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2026 Matt Breimer
+  </footer>
+
+  <script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const links    = document.querySelectorAll('.nav-links a');
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -55% 0px' });
+
+    sections.forEach(s => io.observe(s));
+  </script>
+
+</body>
+</html>
