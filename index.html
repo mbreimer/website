@@ -330,6 +330,43 @@
 
     .c-val a:hover { text-decoration: underline; }
 
+    /* ── BACK TO TOP ─────────────────────────────── */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, background 0.2s;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-to-top:hover { background: var(--accent); }
+
+    #back-to-top svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(255,255,255,0.8);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     /* ── FOOTER ──────────────────────────────────── */
     footer {
       background: var(--navy);
@@ -587,6 +624,13 @@
     </section>
   </div>
 
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
   <!-- FOOTER -->
   <footer>
     &copy; 2026 Matt Breimer
@@ -608,6 +652,18 @@
     }, { rootMargin: '-45% 0px -55% 0px' });
 
     sections.forEach(s => io.observe(s));
+
+    // Back to top button
+    const btn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.replaceState(null, '', window.location.pathname);
+    });
   </script>
 
 </body>
